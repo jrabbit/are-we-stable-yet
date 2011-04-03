@@ -20,17 +20,19 @@ def get_db():
      return anydbm.open('nighties', 'c')
 def store():
     db = get_db()
-    if db['meta'] = 'setup':
+    if 'meta' in db:
         for rev in list_nightlies():
-            if rev not in db:
-                db[rev] = 'unknown'
+            if str(rev) not in db:
+                db[str(rev)] = 'unknown'
     else:
-        fo rev in scraper():
-            db[rev] = 'unknown'
+        for rev in scraper():
+            db[str(rev)] = 'unknown'
         db['meta'] = 'setup'
     db['last-edit'] = time.ctime() + time.strftime('%Z')
         
 if __name__ == '__main__':
+    import sys
     if sys.argv and sys.argv[1].lower() in ['-d', 'db', 'database']:
         store()
-    print list_nightlies()
+    else:
+        print list_nightlies()
