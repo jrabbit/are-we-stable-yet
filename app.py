@@ -1,5 +1,6 @@
 from bottle import route, run, static_file, debug, template, default_app
 from paste import httpserver
+import time
 import anydbm
 
 import nightlies as magic
