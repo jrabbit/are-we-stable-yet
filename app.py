@@ -55,7 +55,7 @@ def db_update():
     now = time.time()
     if last - now > 7200:
         magic.store()
-while 1:
-    db_update()
+# while 1:
+#     db_update()
 # run(server='paste',host='192.168.1.45', port=8080, reloader=True)
 # httpserver.serve(default_app(), host='192.168.1.45', port=8080)
