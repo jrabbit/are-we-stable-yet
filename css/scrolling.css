@@ -60,3 +60,73 @@ footer {
 	text-align: center;
 	width: 100%;
 }
+/*jquery UI Overrides*/
+.unstable {
+	/* Legacy browsers */
+	background: url("gradient-bg.png") repeat-x top;
+	-o-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	/* Recent browsers */
+	background: -moz-linear-gradient(
+		top,
+		#F7363E,
+		#771A1E
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#F7363E),
+		to(#771A1E)
+	);
+	color: #222222;
+    font-weight: bold;
+}
+
+.working {
+	/* Legacy browsers */
+	background: url("gradient-bg.png") repeat-x top;
+	-o-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	/* Recent browsers */
+	background: -moz-linear-gradient(
+		top,
+		#629AE5,
+		#263C59
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#629AE5),
+		to(#263C59)
+	);
+	color: #222222;
+    font-weight: bold;
+}
+
+
+.unknown {
+	/* Legacy browsers */
+	background: url("gradient-bg.png") repeat-x top;
+	-o-background-size: 100% 100%;
+	-moz-background-size: 100% 100%;
+	-webkit-background-size: 100% 100%;
+	background-size: 100% 100%;
+	/* Recent browsers */
+	background: -moz-linear-gradient(
+		top,
+		#7643E5,
+		#2E1A59
+	);
+	background: -webkit-gradient(
+		linear,
+		left top, left bottom,
+		from(#7643E5),
+		to(#2E1A59)
+	);
+	color: #222222;
+    font-weight: bold;
+}
