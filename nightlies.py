@@ -32,7 +32,8 @@ def store():
         
 if __name__ == '__main__':
     import sys
-    if sys.argv and sys.argv[1].lower() in ['-d', 'db', 'database']:
-        store()
+    if sys.argv > 1:
+        if sys.argv[1].lower() in ['-d', 'db', 'database']:
+            store()
     else:
         print list_nightlies()
