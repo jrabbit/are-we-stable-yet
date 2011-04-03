@@ -25,14 +25,14 @@ def nighties():
 @route('/')
 @route('/index.html')
 def index():
-    return "Not yet!"
+    return static_file('index.html', root='./')
 
 @route('/js/:filename')
 @route('/css/:filename')
 def server_static(filename):
-    return static_file(filename, root='./static')
+    return static_file(filename, root='./')
 
 def get_db():
     return anydbm.open('nighties', 'c')
 
-run(host='localhost', port=8080)
+run(host='localhost', port=8080, reloader=True)
