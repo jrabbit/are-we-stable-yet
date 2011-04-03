@@ -1,6 +1,8 @@
 import feedparser
 from BeautifulSoup import BeautifulSoup
 import urllib
+import anydbm
+import time
 
 def list_nightlies(initial=False):
     if initial:
@@ -13,6 +15,22 @@ def scraper():
     url = "http://haiku-files.org/vmware/index.php?show=all"
     soup = BeautifulSoup(urllib.urlopen(url))
     return set(x.text.split('-')[2] for x in soup.findAll('a', 'link') if x.text[0] == 'h')
-    
+
+def get_db():
+     return anydbm.open('nighties', 'c')
+def store():
+    db = get_db()
+    if db['meta'] = 'setup':
+        for rev in list_nightlies():
+            if rev not in db:
+                db[rev] = 'unknown'
+    else:
+        fo rev in scraper():
+            db[rev] = 'unknown'
+        db['meta'] = 'setup'
+    db['last-edit'] = time.ctime() + time.strftime('%Z')
+        
 if __name__ == '__main__':
+    if sys.argv and sys.argv[1].lower() in ['-d', 'db', 'database']:
+        store()
     print list_nightlies()
