@@ -21,7 +21,7 @@ def get_db():
 def store():
     db = get_db()
     if 'meta' in db:
-        for rev in list_nightlies():
+        for rev in sorted(list_nightlies(), reverse=True):
             if str(rev) not in db:
                 db[str(rev)] = 'unknown'
     else:
