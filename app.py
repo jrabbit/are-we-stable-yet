@@ -28,15 +28,21 @@ def nighties():
 def index():
     htmls = ''
     db = get_db()
-    for x in db:
-        htmls = htmls + ("<div class='%s' id='%s'>%s</div>" %(db[x],x, x))
+    l = db.items()
+    l.reverse()
+    for x in l:
+        if x[0] not in ['meta', 'last-edit']:
+            htmls = htmls + ("<div class='scroll-content-item ui-widget-header' \
+            id='%s'>%s :</br> %s</div>" %(x[0], x[0], x[1]))
     
     return template('index.html', htmls=htmls)
 
 @route('/js/:filename')
-@route('/css/:filename')
-def server_static(filename):
-    return static_file(filename, root='./')
+def js_static(filename):
+    return static_file(filename, root='./js')
+@route('/css/:filename#.+#')
+def css_static(filename):
+    return static_file(filename, root='./css')
 
 def get_db():
     return anydbm.open('nighties', 'c')
