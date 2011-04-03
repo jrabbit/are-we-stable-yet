@@ -1,7 +1,8 @@
-from bottle import route, run, static_file
+from bottle import route, run, static_file, debug, template
 import anydbm
 
 import nightlies as magic
+debug(True)
 
 
 @route('/broken/:build')
@@ -25,7 +26,12 @@ def nighties():
 @route('/')
 @route('/index.html')
 def index():
-    return static_file('index.html', root='./')
+    htmls = ''
+    db = get_db()
+    for x in db:
+        htmls = htmls + ("<div class='%s' id='%s'>%s</div>" %(db[x],x, x))
+    
+    return template('index.html', htmls=htmls)
 
 @route('/js/:filename')
 @route('/css/:filename')
