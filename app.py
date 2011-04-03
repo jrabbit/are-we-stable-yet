@@ -7,14 +7,16 @@ import nightlies as magic
 @route('/broken/:build')
 def broken(build):
     nightlies = get_db()
-    nightlies[build] = "unstable"
-    print nightlies
+    if build in nightlies:
+        nightlies[build] = "unstable"
+        print nightlies
 
 @route('/working/:build')
 def working(build):
     nightlies = get_db()
-    nightlies[build] = "working"
-    print nightlies
+    if build in nightlies:
+        nightlies[build] = "working"
+        print nightlies
 
 @route('/nightlies')
 def nighties():
