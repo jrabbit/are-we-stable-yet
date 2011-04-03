@@ -10,14 +10,14 @@ def broken(build):
     nightlies = get_db()
     if build in nightlies:
         nightlies[build] = "unstable"
-        print nightlies
+        # print nightlies
 
 @route('/working/:build')
 def working(build):
     nightlies = get_db()
     if build in nightlies:
         nightlies[build] = "working"
-        print nightlies
+        # print nightlies
 
 @route('/nightlies')
 def nighties():
@@ -34,8 +34,9 @@ def index():
         if x[0] not in ['meta', 'last-edit']:
             htmls = htmls + ("<div class='scroll-content-item ui-widget-header' \
             id='%s'>%s :</br> %s</div>" %(x[0], x[0], x[1]))
-    
-    return template('index.html', htmls=htmls)
+    style = ".scroll-content {width: %spx;float: left;}" % str(len(l) *120)
+    # print style
+    return template('index.html', htmls=htmls, style=style)
 
 @route('/js/:filename')
 def js_static(filename):
