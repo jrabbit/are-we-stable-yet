@@ -32,8 +32,8 @@ def index():
     l.reverse()
     for x in l:
         if x[0] not in ['meta', 'last-edit']:
-            htmls = htmls + ("<div class='scroll-content-item ui-widget-header' \
-            id='%s'>%s :</br> %s</div>" %(x[0], x[0], x[1]))
+            htmls = htmls + ("<div class='scroll-content-item ui-widget-header %s' \
+            id='%s'>%s :</br> %s</div>" %(x[1], x[0], x[0], x[1]))
     style = ".scroll-content {width: %spx;float: left;}" % str(len(l) *120)
     # print style
     return template('index.html', htmls=htmls, style=style)
