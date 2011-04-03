@@ -28,7 +28,7 @@ def store():
         for rev in scraper():
             db[str(rev)] = 'unknown'
         db['meta'] = 'setup'
-    db['last-edit'] = time.ctime() + time.strftime('%Z')
+    db['last-edit'] = time.ctime() +' '+ time.strftime('%Z')
         
 if __name__ == '__main__':
     import sys

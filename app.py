@@ -1,20 +1,29 @@
 from bottle import route, run, static_file
 import anydbm
 
-@route('/hello')
-def hello():
-    return "Hello World!"
+import nightlies as magic
+
 
 @route('/broken/:build')
 def broken(build):
-    # nightlies = {u'r41096': "unkown"}
     nightlies = get_db()
     nightlies[build] = "unstable"
+    print nightlies
+
+@route('/working/:build')
+def working(build):
+    nightlies = get_db()
+    nightlies[build] = "working"
     print nightlies
 
 @route('/nightlies')
 def nighties():
     return dict(get_db()) #anydbm object not recognized as dict for auto json
+
+@route('/')
+@route('/index.html')
+def index():
+    return "Not yet!"
 
 @route('/js/:filename')
 @route('/css/:filename')
