@@ -3,7 +3,8 @@ from fabric.api import run, env, cd
 env.hosts = ['jrabbit@serenity.jrfxmedia.com']
 
 def update_gunicorn():
-    with cd('~/are-we-stable-yet'):
+    with cd('/home/jrabbit/are-we-stable-yet/'):
+        run('pwd')
         run("kill -HUP  `cat gunicorn.pid`")
 
 def start_gunicorn(host='serenity.jrfxmedia.com'):
@@ -12,7 +13,7 @@ def start_gunicorn(host='serenity.jrfxmedia.com'):
 
 def pull():
     with cd('~/are-we-stable-yet'):
-        run('git pull')
+        run('eval `ssh-agent` && ssh-add ~/.ssh/id_proj && git pull; kill -9 $SSH_AGENT_PID')
         update_gunicorn()
 
 
