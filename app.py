@@ -48,6 +48,13 @@ def css_static(filename):
 
 def get_db():
     return anydbm.open('nighties', 'c')
-
+def db_update():
+    d = get_db()
+    last = time.mktime(time.strptime(d['last-edit'], "%a %b %d %H:%M:%S %Y %Z"))
+    now = time.time()
+    if last - now > 7200:
+        magic.store()
+while 1:
+    db_update()
 # run(server='paste',host='192.168.1.45', port=8080, reloader=True)
 # httpserver.serve(default_app(), host='192.168.1.45', port=8080)
