@@ -50,4 +50,4 @@ def get_db():
     return anydbm.open('nighties', 'c')
 
 # run(server='paste',host='192.168.1.45', port=8080, reloader=True)
-httpserver.serve(default_app(), host='192.168.1.45', port=8080)
+# httpserver.serve(default_app(), host='192.168.1.45', port=8080)
