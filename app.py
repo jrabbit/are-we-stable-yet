@@ -1,4 +1,5 @@
-from bottle import route, run, static_file, debug, template
+from bottle import route, run, static_file, debug, template, default_app
+from paste import httpserver
 import anydbm
 
 import nightlies as magic
@@ -48,4 +49,5 @@ def css_static(filename):
 def get_db():
     return anydbm.open('nighties', 'c')
 
-run(host='localhost', port=8080, reloader=True)
+# run(server='paste',host='192.168.1.45', port=8080, reloader=True)
+httpserver.serve(default_app(), host='192.168.1.45', port=8080)
