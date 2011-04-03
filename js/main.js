@@ -15,14 +15,23 @@ $(document).ready(function(){
     $('.scroll-content-item').click(function() { 
         console.log(this);
         console.log(this.id);
+        var rev = this.id;
         $('#modal').dialog({
             height:200, 
-            modal:true, 
-            buttons: {"Works For Me!": function(){
-                $( this ).dialog( "close" )}, 
+            modal:true,
+            buttons: 
+                {"Works For Me!": function(){
+                    $(this).dialog("close");
+                    $.get("/working/" + rev);
+                    window.location.reload();
+                    }, 
                 "This is buggy!": function(){
-                $( this ).dialog( "close" )}
-            }})
+                    $(this).dialog("close");
+                    $.get("/broken/" + rev);
+                    window.location.reload();
+                    }
+                }
+            })
     });
 });
 
