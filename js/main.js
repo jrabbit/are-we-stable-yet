@@ -11,17 +11,19 @@ function loadnightlies(data){
 
 $(document).ready(function(){
     $('#modal').hide()
-    $.getJSON("nightlies", loadnightlies)
+    // $.getJSON("nightlies", loadnightlies)
     $('.scroll-content-item').click(function() { 
         console.log(this);
         console.log(this.id);
         var rev = this.id;
         $('#modal').dialog({
-            height:200, 
+            height:170,
+            width:300, 
             modal:true,
             buttons: 
                 {"Works For Me!": function(){
                     $(this).dialog("close");
+                    //Get may be a bug!
                     $.get("/working/" + rev);
                     window.location.reload();
                     }, 

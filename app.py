@@ -37,8 +37,9 @@ def index():
             htmls = htmls + ("<div class='scroll-content-item ui-widget-header %s' \
             id='%s'>%s :</br> %s</div>" %(x[1], x[0], x[0], x[1]))
     style = ".scroll-content {width: %spx;float: left;}" % str(len(l) *120)
+    
     # print style
-    return template('index.html', htmls=htmls, style=style)
+    return template('index.html', htmls=htmls, style=style, edit=db['last-edit'])
 
 @route('/js/:filename')
 def js_static(filename):
