@@ -31,8 +31,8 @@ def index():
     htmls = ''
     db = get_db()
     l = db.items()
-    l.reverse()
-    for x in l:
+    # l.reverse()
+    for x in sorted(l, reverse=True):
         if x[0] not in ['meta', 'last-edit']:
             htmls = htmls + ("<div class='scroll-content-item ui-widget-header %s' \
             id='%s'>%s :</br> %s</div>" %(x[1], x[0], x[0], x[1]))
