@@ -14,7 +14,7 @@ def list_nightlies(initial=False):
 def scraper():
     url = "http://haiku-files.org/vmware/index.php?show=all"
     soup = BeautifulSoup(urllib.urlopen(url))
-    return set(sorted((x.text.split('-')[2] for x in soup.findAll('a', 'link') if x.text[0] == 'h'), reverse=True))
+    return set(x.text.split('-')[2] for x in soup.findAll('a', 'link') if x.text[0] == 'h')
 
 def get_db():
      return anydbm.open('nighties', 'c')
@@ -25,7 +25,7 @@ def store():
             if str(rev) not in db:
                 db[str(rev)] = 'unknown'
     else:
-        for rev in scraper():
+        for rev in sorted(scraper(), reverse=True):
             db[str(rev)] = 'unknown'
         db['meta'] = 'setup'
     db['last-edit'] = time.ctime() +' '+ time.strftime('%Z')
