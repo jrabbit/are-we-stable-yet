@@ -24,13 +24,15 @@ $(document).ready(function(){
                 {"Works For Me!": function(){
                     $(this).dialog("close");
                     //Get may be a bug!
-                    $.get("/working/" + rev);
-                    window.location.reload();
+                    $.get("/working/" + rev, function(data){
+                        window.location.reload();
+                    });
                     }, 
                 "This is buggy!": function(){
                     $(this).dialog("close");
-                    $.get("/broken/" + rev);
-                    window.location.reload();
+                    $.get("/broken/" + rev, function(data){
+                        window.location.reload();
+                    });
                     }
                 }
             })
