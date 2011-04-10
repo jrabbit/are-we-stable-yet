@@ -37,9 +37,13 @@ def index():
     # l.reverse()
     for x in sorted(l, reverse=True):
         if x[0] not in ['meta', 'last-edit']:
+            if len(x[1].split()) > 1:
+                trac = "<a href='%s'>%s </a>" % (x[1].split()[1], x[1].split()[1])
+            else:
+                trac = "&mdash;"
             status = x[1].split()[0]
-            htmls = htmls + ("<div class='scroll-content-item ui-widget-header click-bind %s' \
-            id='%s'>%s :</br> %s</div>" %(status, x[0], x[0], status))
+            htmls = htmls + ("<div> <div class='scroll-content-item ui-widget-header click-bind %s' \
+            id='%s'>%s :</br> %s</div> <div class='hidden trac-url'>%s</div></div>" %(status, x[0], x[0], status, trac))
     style = ".scroll-content {width: %spx;float: left;}" % str(len(l) *120)
     
     # print style
@@ -61,8 +65,8 @@ def table():
                 trac = "<a href='%s'>%s </a>" % (x[1].split()[1], x[1].split()[1])
             else:
                 trac = "&mdash;"
-            htmls = htmls + ("<tr class=' %s' id='%s'> <td class='table-rev'> %s</td> <td id='%s' class='table-status click-bind'>%s</td> <td class='trac-url'>%s</td> </tr>" \
-            %(status, x[0], x[0],x[0], status, trac) )        
+            htmls = htmls + ("<tr id='%s-row'> <td class='table-rev'> %s</td> <td id='%s' class='table-status click-bind %s'>%s</td> <td class='trac-url'>%s</td> </tr>" \
+            %( x[0], x[0],x[0], status, status, trac) )        
     style = ''
     htmls = htmls + "</table>"
     return template('index.html', kind='table', htmls=htmls, style=style, edit=db['last-edit'])
