@@ -6,13 +6,15 @@ import anydbm
 import nightlies as magic
 debug(True)
 
-
+@route('/broken/:build/:trac')
 @route('/broken/:build')
-def broken(build):
+def broken(build, **kwargs):
     nightlies = get_db()
     if build in nightlies:
-        nightlies[build] = "unstable"
-        # print nightlies
+        if 'trac' in kwargs:
+            nightlies[build] = "unstable %s" % kwargs['trac']
+        else:
+            nightlies[build] = "unstable"
 
 @route('/working/:build')
 def working(build):
@@ -26,6 +28,7 @@ def nighties():
     return dict(get_db()) #anydbm object not recognized as dict for auto json
 
 @route('/')
+@route('/scroll')
 @route('/index.html')
 def index():
     htmls = ''
@@ -34,8 +37,9 @@ def index():
     # l.reverse()
     for x in sorted(l, reverse=True):
         if x[0] not in ['meta', 'last-edit']:
+            status = x[1].split()[0]
             htmls = htmls + ("<div class='scroll-content-item ui-widget-header %s' \
-            id='%s'>%s :</br> %s</div>" %(x[1], x[0], x[0], x[1]))
+            id='%s'>%s :</br> %s</div>" %(status, x[0], x[0], status))
     style = ".scroll-content {width: %spx;float: left;}" % str(len(l) *120)
     
     # print style
@@ -58,5 +62,5 @@ def db_update():
         magic.store()
 # while 1:
 #     db_update()
-# run(server='paste',host='192.168.1.45', port=8080, reloader=True)
+run(host='localhost', port=8080, reloader=True)
 # httpserver.serve(default_app(), host='192.168.1.45', port=8080)
