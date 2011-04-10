@@ -12,7 +12,7 @@ function loadnightlies(data){
 $(document).ready(function(){
     $('#modal').hide()
     // $.getJSON("nightlies", loadnightlies)
-    $('.scroll-content-item').click(function() { 
+    $('.click-bind').click(function() { 
         console.log(this);
         console.log(this.id);
         var rev = this.id;
@@ -24,6 +24,7 @@ $(document).ready(function(){
                 {"Works For Me!": function(){
                     $(this).dialog("close");
                     //Get may be a bug!
+                    
                     $.get("/working/" + rev, function(data){
                         window.location.reload();
                     });

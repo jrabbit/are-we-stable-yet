@@ -25,19 +25,28 @@
 		</hgroup>
 	</header>
 	<section id='statuses'>
+		%if kind is 'scroll':
 		<div class="scroll-pane ui-widget ui-widget-header ui-corner-all">
 			<div class="scroll-content">
+		%end
 				{{!htmls}}
+		%if kind is 'scroll':
 			</div>
 			<div class="scroll-bar-wrap ui-widget-content ui-corner-bottom">
 				<div class="scroll-bar"></div>
 			</div>
 		</div>
+		%end
 	</section>
 	<section id='modal'>
 		This will do something.
 	</section>
 	<footer>
+		%if kind is 'scroll':
+			<a href='table'> View as table </a>
+		%else:
+			<a href='/'> View as scroller </a>
+		%end
 		<div id='edited'>This was last edited at: {{edit}} </div>
 		<img src='/css/PythonPowered.png' alt='python'>
 	<!-- <a href='http://www.haiku-os.org/'><img src='/css/haiku.png' alt='Haiku'></a> -->

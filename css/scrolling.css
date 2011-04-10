@@ -59,6 +59,7 @@ footer {
 	position: fixed;
 	text-align: center;
 	width: 100%;
+	font-size: 12px;
 }
 /*jquery UI Overrides*/
 .unstable {
@@ -129,4 +130,15 @@ footer {
 	);
 	color: #222222;
     font-weight: bold;
+}
+
+/*Table layout voodoo*/
+.trac-url {
+    text-align: center;
+}
+.revisions {
+    text-align: center;
+    width: 60%;
+    margin-left:auto; 
+    margin-right:auto;
 }

@@ -38,12 +38,34 @@ def index():
     for x in sorted(l, reverse=True):
         if x[0] not in ['meta', 'last-edit']:
             status = x[1].split()[0]
-            htmls = htmls + ("<div class='scroll-content-item ui-widget-header %s' \
+            htmls = htmls + ("<div class='scroll-content-item ui-widget-header click-bind %s' \
             id='%s'>%s :</br> %s</div>" %(status, x[0], x[0], status))
     style = ".scroll-content {width: %spx;float: left;}" % str(len(l) *120)
     
     # print style
-    return template('index.html', htmls=htmls, style=style, edit=db['last-edit'])
+    return template('index.html', kind='scroll', htmls=htmls, style=style, edit=db['last-edit'])
+
+@route('/table')
+def table():
+    htmls = """<table class='revisions'>
+    <tr> <th>Revision</th> <th>Status</th> <th>Trac Id</th> </tr>
+    
+    """
+    # initial table stuff
+    db = get_db()
+    l = db.items()
+    for x in sorted(l, reverse=True):
+        if x[0] not in ['meta', 'last-edit']:
+            status = x[1].split()[0]
+            if len(x[1].split()) > 1:
+                trac = "<a href='%s'>%s </a>" % (x[1].split()[1], x[1].split()[1])
+            else:
+                trac = "&mdash;"
+            htmls = htmls + ("<tr class=' %s' id='%s'> <td class='table-rev'> %s</td> <td id='%s' class='table-status click-bind'>%s</td> <td class='trac-url'>%s</td> </tr>" \
+            %(status, x[0], x[0],x[0], status, trac) )        
+    style = ''
+    htmls = htmls + "</table>"
+    return template('index.html', kind='table', htmls=htmls, style=style, edit=db['last-edit'])
 
 @route('/js/:filename')
 def js_static(filename):
