@@ -62,5 +62,5 @@ def db_update():
         magic.store()
 # while 1:
 #     db_update()
-run(host='localhost', port=8080, reloader=True)
+#run(host='localhost', port=8080, reloader=True)
 # httpserver.serve(default_app(), host='192.168.1.45', port=8080)

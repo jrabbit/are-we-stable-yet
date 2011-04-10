@@ -4,7 +4,6 @@ env.hosts = ['jrabbit@serenity.jrfxmedia.com']
 
 def update_gunicorn():
     with cd('/home/jrabbit/are-we-stable-yet/'):
-        run('pwd')
         run("kill -HUP  `cat gunicorn.pid`")
 
 def start_gunicorn(host='serenity.jrfxmedia.com'):
