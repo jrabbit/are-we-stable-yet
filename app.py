@@ -1,7 +1,7 @@
-from bottle import route, run, static_file, debug, template, default_app
-from paste import httpserver
+from bottle import route, run, static_file, debug, template, default_app, request
 import time
 import anydbm
+from urlparse import urlparse
 
 import nightlies as magic
 debug(True)
@@ -12,7 +12,12 @@ def broken(build, **kwargs):
     nightlies = get_db()
     if build in nightlies:
         if 'trac' in kwargs:
-            nightlies[build] = "unstable %s" % kwargs['trac']
+            if urlparse(kwargs['trac']).netloc is 'dev.haiku-os.org':
+                nightlies[build] = "unstable %s" % kwargs['trac']
+            elif kwargs['trac'].isdigit():
+                nightlies[build] = "unstable %s" % "https://dev.haiku-os.org/ticket/" + kwargs['trac']
+            else:
+                print "Possible spam from %s : %s" % (request.environ.get('REMOTE_ADDR'), kwargs['trac'])
         elif len(nightlies[build].split()) > 1:
             pass
         else:

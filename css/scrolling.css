@@ -133,14 +133,14 @@ footer {
 }
 
 /*Table layout voodoo*/
-.trac-url {
-    text-align: center;
-}
 
 tr:nth-child(even) {
     background-color: #999;
 }
 
+td {
+    width: 20%;
+}
 .revisions {
     text-align: center;
     width: 60%;
