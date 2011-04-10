@@ -13,6 +13,8 @@ def broken(build, **kwargs):
     if build in nightlies:
         if 'trac' in kwargs:
             nightlies[build] = "unstable %s" % kwargs['trac']
+        elif len(nightlies[build].split()) > 1:
+            pass
         else:
             nightlies[build] = "unstable"
 

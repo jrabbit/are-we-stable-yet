@@ -19,15 +19,15 @@ $(document).ready(function(){
         var rev = this.id;
         // $('#r41162').parent().children('.trac-url').text() = trac url
         if ($(this.id).parent().children('.trac-url').text() !== '—'){
-            $('#modal').html("If this is a buggy nightly have you reported it on <a href='https://dev.haiku-os.org'>the bug tracker?</a>")
+            $('#modal').html("If this is a buggy nightly have you reported it on <a href='https://dev.haiku-os.org'>the bug tracker?</a> \n <input type='text' id='url-submit'></input>")
         }else{
             $('#modal').html("Did you report your findings to <a href='" +$(this.id).parent().children('.trac-url').text() + "'> the trac ticket? </a>" )
         };
             
         $('#modal').dialog({
             title:"Update the status of " + rev,
-            height:170,
-            width:300, 
+            height:270,
+            width:320, 
             modal:true,
             buttons: 
                 {"Works For Me!": function(){
@@ -37,12 +37,20 @@ $(document).ready(function(){
                     $.get("/working/" + rev, function(data){
                         window.location.reload();
                     });
-                    }, 
+                    },
+                 
                 "This is buggy!": function(){
                     $(this).dialog("close");
-                    $.get("/broken/" + rev, function(data){
-                        window.location.reload();
-                    });
+                    if ($('#url-submit').val() != 0){
+                        $.get("/broken/" + rev + '/' + $('#url-submit').val(), function(data){
+                            window.location.reload();
+                        });
+                    }else{
+                        $.get("/broken/" + rev, function(data){
+                            window.location.reload();
+                        });
+                    }
+
                     }
                 }
             })
